@@ -66,7 +66,7 @@ Usa las siguientes credenciales para acceder a la consola H2:
 
 - **JDBC URL:** jdbc:h2:mem:testdb
 - **Username:** sa
-- **Password:** *(dejar en blanco)*
+- **Password:** "password"
 
 **Configuración del Puerto**
 
