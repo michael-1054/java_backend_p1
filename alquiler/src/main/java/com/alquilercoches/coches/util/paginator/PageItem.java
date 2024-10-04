@@ -1,4 +1,4 @@
-package com.ejerciciosmesa.coches.util.paginator;
+package com.alquilercoches.coches.util.paginator;
 
 public class PageItem {
 

@@ -1,4 +1,4 @@
-package com.ejerciciosmesa.coches.util.paginator;
+package com.alquilercoches.coches.util.paginator;
 
 import java.util.ArrayList;
 import java.util.List;
