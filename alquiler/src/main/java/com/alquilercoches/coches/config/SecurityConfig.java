@@ -1,5 +1,9 @@
 package com.alquilercoches.coches.config;
 
+import com.alquilercoches.coches.controllers.Corporative_usersController;
+import com.alquilercoches.coches.models.dao.Corporative_usersDAO;
+import com.alquilercoches.coches.models.entities.Corporative_users;
+import com.alquilercoches.coches.models.services.Corporative_usersService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,11 +16,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+	private final Corporative_usersService users;
+
+	@Autowired
+	public SecurityConfig( Corporative_usersService users){
+		this.users = users;
+	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -26,20 +41,32 @@ public class SecurityConfig {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		PasswordEncoder encoder = passwordEncoder();
-
-		UserDetails user = User.builder().passwordEncoder(encoder::encode)
-				.username("user")
-				.password("1234")
-				.roles("USER")
-				.build();
-
+		List<Corporative_users> users_list = this.users.findAll();
+		List<UserDetails> user_data = new ArrayList<>();
 		UserDetails admin = User.builder().passwordEncoder(encoder::encode)
 				.username("admin")
 				.password("1234")
 				.roles("ADMIN", "USER")
 				.build();
+		user_data.add(admin);
+		for(Corporative_users user : users_list){
+			UserDetails user_d = User.builder().passwordEncoder(encoder::encode)
+					.username(user.getUser())
+					.password(user.getPassword())
+					.roles("USER")
+					.build();
+			user_data.add(user_d);
+		}
 
-		return new InMemoryUserDetailsManager(user, admin);
+/*		UserDetails user = User.builder().passwordEncoder(encoder::encode)
+				.username("user")
+				.password("1234")
+				.roles("USER")
+				.build();
+*/
+
+
+		return new InMemoryUserDetailsManager(user_data);
 	}
 
 	@Bean
