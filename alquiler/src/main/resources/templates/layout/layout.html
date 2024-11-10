@@ -9,12 +9,18 @@
 	<title th:text="${applicationData.getScreenName(optionCode,screen)}"></title>
 </th:block>
 
+
 <th:block th:fragment="head-basic-login">
 	<meta charset="UTF-8">
 	<title th:text="${applicationData.getName()}"></title>
 </th:block>
 
-<th:block th:fragment="bootstrap-css">
+	<th:block th:fragment="head-basic-register">
+		<meta charset="UTF-8">
+		<title th:text="${applicationData.getName()}"></title>
+	</th:block>
+
+		<th:block th:fragment="bootstrap-css">
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </th:block>
 

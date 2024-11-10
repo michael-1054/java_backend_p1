@@ -60,8 +60,15 @@ public class Corporative_usersServiceImpl implements Corporative_usersService {
 	public Long count() {
 		return corporative_usersDAO.count();
 	}
-	
-	
-	
+
+
+	@Transactional
+	@Override
+	public void save(String user, String password) {
+		Corporative_users c_user = new Corporative_users();
+		c_user.setUser(user);
+		c_user.setPassword(password);
+		corporative_usersDAO.save(c_user);
+	}
 	
 }

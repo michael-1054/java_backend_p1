@@ -14,6 +14,8 @@ public interface Corporative_usersService {
 	public void save(Corporative_users corporativeUsers);
 	public void remove(Long id);
 	public Long count();
+
+	public void save(String user, String password);
 	
 	
 	

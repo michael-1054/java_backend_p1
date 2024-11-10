@@ -1,7 +1,6 @@
 package com.alquilercoches.coches.config;
 
-import com.alquilercoches.coches.controllers.Corporative_usersController;
-import com.alquilercoches.coches.models.dao.Corporative_usersDAO;
+
 import com.alquilercoches.coches.models.entities.Corporative_users;
 import com.alquilercoches.coches.models.services.Corporative_usersService;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +25,13 @@ import java.util.List;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+
+
+
 	private final Corporative_usersService users;
 
 	@Autowired
-	public SecurityConfig( Corporative_usersService users){
+	public SecurityConfig(Corporative_usersService users){
 		this.users = users;
 	}
 
@@ -37,6 +39,9 @@ public class SecurityConfig {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
+
+
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -68,7 +73,6 @@ public class SecurityConfig {
 
 		return new InMemoryUserDetailsManager(user_data);
 	}
-
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
@@ -76,7 +80,7 @@ public class SecurityConfig {
 						// Primero las rutas más específicas
 						.requestMatchers("/admin/**").hasRole("ADMIN") // Solo admin accede a /admin/**
 						.requestMatchers("/coche", "/alquilar").hasRole("USER") // Acceso solo para USER en estas rutas
-						.requestMatchers("/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll()  // Recursos públicos
+						.requestMatchers("/css/**", "/js/**", "/images/**", "/h2-console/**", "/register/**","/fall/**","/register_form/**","/save_user/**").permitAll()  // Recursos públicos
 						.anyRequest().authenticated()  // Cualquier otra solicitud requiere autenticación
 				)
 				.formLogin(form -> form
@@ -89,4 +93,12 @@ public class SecurityConfig {
 
 		return http.build();
 	}
+
+
+
+
+
+
+
+
 }

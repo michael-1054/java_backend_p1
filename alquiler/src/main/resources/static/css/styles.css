@@ -13,8 +13,12 @@
 	--background-color-form: #e8ead4;
 	--shadow-form: rgba(54, 229, 23, 0.075);
 	--color-subtle: rgb(128, 128, 128);
+    --divider-color: #b3c7e6; /* Azul claro para el divisor */
+    --logo-shadow: rgba(0, 0, 0, 0.15); /* Sombra suave para el logo */
+    --form-border-color:  rgb(218, 247, 202); /* Azul corporativo para el marco del formulario */
+    --form-shadow: rgba(29, 122, 255, 0.1); /* Sombra ligera en el formulario */
 }
- 
+
 .menu-bar {
 	background-color: var(--bgcolor-menu);
 	color:var(--color-menu)!important;
@@ -202,4 +206,3 @@ input::file-selector-button {
 .error-info a:hover {
 	color: var(--color-menu-hover)!important;
 }
-
